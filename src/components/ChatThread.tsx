@@ -55,7 +55,7 @@ export function ChatThread({ onSwitchToSearch }: ChatThreadProps) {
   return (
     <ThreadPrimitive.Root className="flex flex-1 flex-col min-h-0">
       <ThreadPrimitive.Viewport className="flex flex-1 flex-col items-center overflow-y-auto scroll-smooth">
-        <div className="w-full max-w-3xl flex-1 px-4 py-8">
+        <div className="w-full max-w-3xl flex-1 px-4">
           <ThreadPrimitive.Empty>
             <EmptyState onSwitchToSearch={onSwitchToSearch} />
           </ThreadPrimitive.Empty>
@@ -186,7 +186,7 @@ function EmptyState({ onSwitchToSearch }: { onSwitchToSearch?: () => void }) {
   }, [composerRuntime, mention]);
 
   return (
-    <div className="flex h-full flex-col items-center justify-center pt-[15vh]">
+    <div className="flex h-full flex-col items-center pt-[15vh]">
       {/* Greeting */}
       <Greeting />
 

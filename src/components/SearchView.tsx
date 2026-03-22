@@ -89,7 +89,7 @@ export function SearchView({ onSwitchToChat }: SearchViewProps) {
 
   return (
     <div className="flex-1 overflow-y-auto">
-      <div className="flex flex-col items-center px-4 py-8 pt-[15vh]">
+      <div className="flex flex-col items-center px-4 pt-[15vh] pb-8">
         {/* Greeting */}
         <h1 className="w-full max-w-2xl text-2xl font-light tracking-tight mb-6" style={{ fontFamily: "'DM Sans Variable', sans-serif" }}>
           {settings.firstName
