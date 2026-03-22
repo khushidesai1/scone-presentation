@@ -58,7 +58,7 @@ export function ContextPicker({
   rowRefs.current = [];
 
   return (
-    <div className="pointer-events-auto absolute right-0 bottom-full left-0 z-10 mb-2 max-w-[320px]">
+    <div className="pointer-events-auto absolute bottom-full left-0 z-50 mb-1 w-[320px]">
       <div className="overflow-hidden rounded-2xl border bg-card shadow-xl">
         {showCategories ? (
           /* Category view */

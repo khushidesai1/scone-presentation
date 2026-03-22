@@ -12,10 +12,10 @@ export interface LegalScenario {
 
 export const LEGAL_SCENARIO: LegalScenario = {
   suggestedPrompts: [
-    "Is this non-compete enforceable if the employee moves from Texas to California?",
-    "What factors do courts consider when evaluating non-compete agreements?",
-    "Draft arguments to challenge an overly broad non-compete clause",
-    "Summarize recent FTC actions regarding non-compete agreements",
+    "Is the Martinez non-compete enforceable now that she moved to California?",
+    "Summarize California BPC § 16600 and its impact on out-of-state non-competes",
+    "What are Acme's options if the non-compete is void under California law?",
+    "Compare Texas vs. California enforcement of non-compete clauses",
   ],
 
   workingSteps: [

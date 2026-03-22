@@ -11,7 +11,6 @@ import {
   ArrowRight,
   AtSign,
   ChevronDown,
-  Scale,
   Paperclip,
   Sparkles,
   X,
@@ -21,6 +20,8 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { LEGAL_SCENARIO } from "@/data/legal-responses";
+import { TabbedInputHeader } from "@/components/TabbedInputHeader";
+import { useDemoSettings } from "@/contexts/DemoSettings";
 import type { MentionCandidate, MentionType } from "@/data/legal-context";
 import { ContextPicker } from "@/components/ContextPicker";
 import { SourceChips } from "@/components/SourceChips";
@@ -46,13 +47,17 @@ const MENTION_TYPE_ICONS: Record<MentionType, React.ReactNode> = {
   client: <Users className="h-3 w-3" />,
 };
 
-export function ChatThread() {
+interface ChatThreadProps {
+  onSwitchToSearch?: () => void;
+}
+
+export function ChatThread({ onSwitchToSearch }: ChatThreadProps) {
   return (
-    <ThreadPrimitive.Root className="flex h-full flex-col">
+    <ThreadPrimitive.Root className="flex flex-1 flex-col min-h-0">
       <ThreadPrimitive.Viewport className="flex flex-1 flex-col items-center overflow-y-auto scroll-smooth">
         <div className="w-full max-w-3xl flex-1 px-4 py-8">
           <ThreadPrimitive.Empty>
-            <EmptyState />
+            <EmptyState onSwitchToSearch={onSwitchToSearch} />
           </ThreadPrimitive.Empty>
 
           <ThreadPrimitive.Messages
@@ -71,9 +76,23 @@ export function ChatThread() {
   );
 }
 
+function Greeting() {
+  const { settings } = useDemoSettings();
+  return (
+    <h1
+      className="w-full max-w-2xl text-2xl font-light tracking-tight mb-6"
+      style={{ fontFamily: "'DM Sans Variable', sans-serif" }}
+    >
+      {settings.firstName
+        ? `Hi ${settings.firstName}, how can I help today?`
+        : "Hi there, how can I help today?"}
+    </h1>
+  );
+}
+
 /* ─── Empty State ─────────────────────────────────────────────────────── */
 
-function EmptyState() {
+function EmptyState({ onSwitchToSearch }: { onSwitchToSearch?: () => void }) {
   const [selectedSources, setSelectedSources] = useState<Set<string>>(
     new Set(["westlaw"]),
   );
@@ -167,17 +186,21 @@ function EmptyState() {
   }, [composerRuntime, mention]);
 
   return (
-    <div className="flex h-full flex-col items-center justify-center pt-[20vh]">
-      <div className="flex flex-col items-center gap-3 mb-8">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary">
-          <Scale className="h-6 w-6 text-primary-foreground" />
-        </div>
-        <h1 className="text-2xl font-semibold tracking-tight">Silex AI</h1>
-      </div>
+    <div className="flex h-full flex-col items-center justify-center pt-[15vh]">
+      {/* Greeting */}
+      <Greeting />
 
       {/* Harvey-style large composer card */}
       <div className="relative w-full max-w-2xl">
         <div className="rounded-2xl bg-muted/50 border shadow-sm">
+          {onSwitchToSearch && (
+            <TabbedInputHeader
+              activeTab="chat"
+              onTabChange={(tab) => {
+                if (tab === "search") onSwitchToSearch();
+              }}
+            />
+          )}
           <ComposerPrimitive.Root className="flex flex-col">
             {/* Selected mention chips */}
             {mention.selectedMentions.length > 0 && (
@@ -271,18 +294,27 @@ function EmptyState() {
         </div>
       </div>
 
-      {/* Suggestion chips */}
+      {/* Suggestion chips — only first is live */}
       <div className="mt-6 flex flex-wrap justify-center gap-2 max-w-2xl">
-        {LEGAL_SCENARIO.suggestedPrompts.map((prompt) => (
-          <ThreadPrimitive.Suggestion
-            key={prompt}
-            prompt={prompt}
-            send
-            className="cursor-pointer rounded-full border bg-background px-4 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-          >
-            {prompt}
-          </ThreadPrimitive.Suggestion>
-        ))}
+        {LEGAL_SCENARIO.suggestedPrompts.map((prompt, i) =>
+          i === 0 ? (
+            <ThreadPrimitive.Suggestion
+              key={prompt}
+              prompt={prompt}
+              send
+              className="cursor-pointer rounded-full border bg-background px-4 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            >
+              {prompt}
+            </ThreadPrimitive.Suggestion>
+          ) : (
+            <span
+              key={prompt}
+              className="rounded-full border bg-background px-4 py-2 text-sm text-muted-foreground/50 cursor-default"
+            >
+              {prompt}
+            </span>
+          ),
+        )}
       </div>
     </div>
   );
