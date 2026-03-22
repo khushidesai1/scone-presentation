@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import {
   MENTION_CANDIDATES,
-  MENTION_TYPE_ORDER,
   type MentionCandidate,
   type MentionType,
 } from "@/data/legal-context";

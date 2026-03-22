@@ -44,13 +44,8 @@ export function Navbar({ onLogoClick }: NavbarProps) {
 
         {/* Right: user menu */}
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <button
-              type="button"
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-muted transition-colors hover:bg-accent"
-            >
-              <User className="h-4 w-4 text-muted-foreground" />
-            </button>
+          <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-full bg-muted transition-colors hover:bg-accent">
+            <User className="h-4 w-4 text-muted-foreground" />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48">
             <DropdownMenuItem onClick={() => setSettingsOpen(true)}>
