@@ -5,8 +5,9 @@ import { SlideWithSilex } from "@/components/slides/SlideWithSilex";
 import { SlideSearch } from "@/components/slides/SlideSearch";
 import { SlideChat } from "@/components/slides/SlideChat";
 import { SlideAssist } from "@/components/slides/SlideAssist";
+import { SlideAgent } from "@/components/slides/SlideAgent";
 
-const SLIDES = [SlideCurrentState, SlideThirdParty, SlideWithSilex, SlideSearch, SlideChat, SlideAssist];
+const SLIDES = [SlideCurrentState, SlideThirdParty, SlideWithSilex, SlideSearch, SlideChat, SlideAssist, SlideAgent];
 
 interface PresentationProps {
   onFinish: () => void;

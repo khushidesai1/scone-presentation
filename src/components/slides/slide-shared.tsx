@@ -58,6 +58,7 @@ export const ASSOCIATES = [
   { initials: "LT" },
   { initials: "DP" },
   { initials: "KN" },
+  { initials: "SA", isSilex: true },
 ];
 
 export const TOOLS: { icon: LucideIcon; name: string }[] = [

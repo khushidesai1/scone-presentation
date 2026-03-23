@@ -158,12 +158,22 @@ export function SlideWithSilex() {
                             Associates
                           </span>
                         </div>
-                        <div className="flex items-center gap-3.5 justify-center">
+                        <div className="flex items-start gap-3.5 justify-center">
                           {ASSOCIATES.map((a) => (
-                            <PersonCircle
-                              key={a.initials}
-                              initials={a.initials}
-                            />
+                            <div key={a.initials} className="relative flex flex-col items-center">
+                              {a.isSilex ? (
+                                <div className="h-12 w-12 rounded-full bg-silex/15 text-silex text-sm font-semibold flex items-center justify-center ring-2 ring-silex/30">
+                                  {a.initials}
+                                </div>
+                              ) : (
+                                <PersonCircle initials={a.initials} />
+                              )}
+                              {a.isSilex && (
+                                <span className="absolute -bottom-5 text-[10px] font-semibold text-silex whitespace-nowrap">
+                                  Silex Agent
+                                </span>
+                              )}
+                            </div>
                           ))}
                         </div>
                       </Anim>
