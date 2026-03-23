@@ -9,14 +9,21 @@ import { LegalResearchToolUI } from "@/components/WorkingSteps";
 import { SearchView } from "@/components/SearchView";
 import { Navbar } from "@/components/Navbar";
 import { DemoSettingsProvider } from "@/contexts/DemoSettings";
+import { Presentation } from "@/components/Presentation";
 
 function AppInner() {
-  const [mode, setMode] = useState<"search" | "chat">("search");
+  const [mode, setMode] = useState<"presentation" | "search" | "chat">(
+    "presentation",
+  );
   const runtime = useLocalRuntime(legalChatAdapter, {
     maxSteps: 10,
   });
 
   const goHome = useCallback(() => setMode("search"), []);
+
+  if (mode === "presentation") {
+    return <Presentation onFinish={() => setMode("search")} />;
+  }
 
   if (mode === "search") {
     return (
