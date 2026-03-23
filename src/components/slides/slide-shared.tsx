@@ -416,7 +416,7 @@ export function ThirdPartyBox({
 
         <div className="flex-1 flex flex-col justify-center gap-4">
           <p className="text-lg font-medium text-muted-foreground">
-            Harvey / Legora
+            Harvey / Legora / Clio / Ironclad
           </p>
 
           {/* Issues list inside the box */}

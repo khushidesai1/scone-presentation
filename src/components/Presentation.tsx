@@ -1,8 +1,12 @@
 import { useState, useCallback, useEffect } from "react";
 import { SlideCurrentState } from "@/components/slides/SlideCurrentState";
 import { SlideThirdParty } from "@/components/slides/SlideThirdParty";
+import { SlideWithSilex } from "@/components/slides/SlideWithSilex";
+import { SlideSearch } from "@/components/slides/SlideSearch";
+import { SlideChat } from "@/components/slides/SlideChat";
+import { SlideAssist } from "@/components/slides/SlideAssist";
 
-const SLIDES = [SlideCurrentState, SlideThirdParty];
+const SLIDES = [SlideCurrentState, SlideThirdParty, SlideWithSilex, SlideSearch, SlideChat, SlideAssist];
 
 interface PresentationProps {
   onFinish: () => void;
