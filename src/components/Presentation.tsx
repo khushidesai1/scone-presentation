@@ -6,23 +6,20 @@ import { SlideSearch } from "@/components/slides/SlideSearch";
 import { SlideChat } from "@/components/slides/SlideChat";
 import { SlideAssist } from "@/components/slides/SlideAssist";
 import { SlideAgent } from "@/components/slides/SlideAgent";
+import { SlideDemo } from "@/components/slides/SlideDemo";
 
-const SLIDES = [SlideCurrentState, SlideThirdParty, SlideWithSilex, SlideSearch, SlideChat, SlideAssist, SlideAgent];
+const SLIDES = [SlideCurrentState, SlideThirdParty, SlideWithSilex, SlideSearch, SlideChat, SlideAssist, SlideAgent, SlideDemo];
 
-interface PresentationProps {
-  onFinish: () => void;
-}
+const DEMO_SLIDE_INDEX = SLIDES.length - 1;
 
-export function Presentation({ onFinish }: PresentationProps) {
+export function Presentation() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  const isDemo = currentSlide === DEMO_SLIDE_INDEX;
+
   const goNext = useCallback(() => {
-    if (currentSlide < SLIDES.length - 1) {
-      setCurrentSlide((s) => s + 1);
-    } else {
-      onFinish();
-    }
-  }, [currentSlide, onFinish]);
+    setCurrentSlide((s) => Math.min(SLIDES.length - 1, s + 1));
+  }, []);
 
   const goPrev = useCallback(() => {
     setCurrentSlide((s) => Math.max(0, s - 1));
@@ -30,6 +27,15 @@ export function Presentation({ onFinish }: PresentationProps) {
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
+      // On the demo slide, only capture Escape to go back
+      if (isDemo) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          goPrev();
+        }
+        return;
+      }
+
       if (e.key === "ArrowRight" || e.key === " ") {
         e.preventDefault();
         goNext();
@@ -41,7 +47,7 @@ export function Presentation({ onFinish }: PresentationProps) {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [goNext, goPrev]);
+  }, [goNext, goPrev, isDemo]);
 
   const SlideComponent = SLIDES[currentSlide];
 
@@ -50,13 +56,13 @@ export function Presentation({ onFinish }: PresentationProps) {
       <SlideComponent />
 
       {/* Slide counter */}
-      <div className="fixed bottom-4 right-6 text-xs text-muted-foreground/50">
+      <div className="fixed bottom-4 right-6 text-xs text-muted-foreground/50 z-50">
         {currentSlide + 1} / {SLIDES.length}
       </div>
 
       {/* Navigation hint */}
-      <div className="fixed bottom-4 left-6 text-xs text-muted-foreground/40">
-        Use arrow keys to navigate
+      <div className="fixed bottom-4 left-6 text-xs text-muted-foreground/40 z-50">
+        {isDemo ? "Press Esc to go back" : "Use arrow keys to navigate"}
       </div>
     </div>
   );

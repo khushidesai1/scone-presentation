@@ -8,22 +8,11 @@ import { ChatThread } from "@/components/ChatThread";
 import { LegalResearchToolUI } from "@/components/WorkingSteps";
 import { SearchView } from "@/components/SearchView";
 import { Navbar } from "@/components/Navbar";
-import { DemoSettingsProvider } from "@/contexts/DemoSettings";
-import { Presentation } from "@/components/Presentation";
 
-function AppInner() {
-  const [mode, setMode] = useState<"presentation" | "search" | "chat">(
-    "presentation",
-  );
-  const runtime = useLocalRuntime(legalChatAdapter, {
-    maxSteps: 10,
-  });
-
+export function SlideDemo() {
+  const [mode, setMode] = useState<"search" | "chat">("search");
+  const runtime = useLocalRuntime(legalChatAdapter, { maxSteps: 10 });
   const goHome = useCallback(() => setMode("search"), []);
-
-  if (mode === "presentation") {
-    return <Presentation />;
-  }
 
   if (mode === "search") {
     return (
@@ -44,13 +33,3 @@ function AppInner() {
     </AssistantRuntimeProvider>
   );
 }
-
-function App() {
-  return (
-    <DemoSettingsProvider>
-      <AppInner />
-    </DemoSettingsProvider>
-  );
-}
-
-export default App;
