@@ -1,3 +1,4 @@
+import React from "react";
 import { Anim } from "./slide-shared";
 import { Latex } from "./SconeShared";
 
@@ -18,7 +19,7 @@ function AxialGrid() {
   const svgW = PAD_LEFT + COLS * CELL_W + 8;
   const svgH = PAD_TOP + ROWS * CELL_H + 28;
 
-  const cells: JSX.Element[] = [];
+  const cells: React.ReactElement[] = [];
   for (let r = 0; r < ROWS; r++) {
     for (let c = 0; c < COLS; c++) {
       const x = PAD_LEFT + c * CELL_W;

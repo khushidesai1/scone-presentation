@@ -11,16 +11,6 @@ const obsEdges1 = [{ from: "A", to: "B", step: 0 }, { from: "B", to: "C", step: 
 const obsEdges2 = [{ from: "B", to: "A", step: 0 }, { from: "B", to: "C", step: 0 }];
 const obsEdges3 = [{ from: "C", to: "B", step: 0 }, { from: "B", to: "A", step: 0 }];
 
-// Interventional: we can identify A → B → C uniquely
-const intNodes = [
-  { id: "A", x: 60,  y: 80, step: 0, color: "green" as const },
-  { id: "B", x: 170, y: 80, step: 0, color: "green" as const },
-  { id: "C", x: 280, y: 80, step: 0, color: "green" as const },
-];
-const intEdges = [
-  { from: "A", to: "B", step: 0, color: "blue" as const },
-  { from: "B", to: "C", step: 0, color: "blue" as const },
-];
 
 export function SlideWhyMEC() {
   return (

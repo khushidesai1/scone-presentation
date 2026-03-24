@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Anim } from "./slide-shared";
 import { Latex } from "./SconeShared";
 
@@ -11,7 +11,7 @@ const PIPELINE = [
 ];
 
 // --- Stage definitions ---
-const STAGES: { id: string; label: string; color: string; bg: string; content: JSX.Element }[] = [
+const STAGES: { id: string; label: string; color: string; bg: string; content: React.ReactElement }[] = [
   {
     id: "sampling",
     label: "Subset Sampling",
