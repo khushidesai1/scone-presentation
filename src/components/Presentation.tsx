@@ -1,21 +1,47 @@
 import { useState, useCallback, useEffect } from "react";
-import { SlideCurrentState } from "@/components/slides/SlideCurrentState";
-import { SlideThirdParty } from "@/components/slides/SlideThirdParty";
-import { SlideWithSilex } from "@/components/slides/SlideWithSilex";
-import { SlideSearch } from "@/components/slides/SlideSearch";
-import { SlideChat } from "@/components/slides/SlideChat";
-import { SlideAssist } from "@/components/slides/SlideAssist";
-import { SlideAgent } from "@/components/slides/SlideAgent";
-import { SlideDemo } from "@/components/slides/SlideDemo";
+import { SlideTitle } from "@/components/slides/SlideTitle";
+import { SlideCausalDiscovery } from "@/components/slides/SlideCausalDiscovery";
+import { SlideMarkov } from "@/components/slides/SlideMarkov";
+import { SlideMEC } from "@/components/slides/SlideMEC";
+import { SlideWhyMEC } from "@/components/slides/SlideWhyMEC";
+import { SlideInterventions } from "@/components/slides/SlideInterventions";
+import { SlideSoftInterventions } from "@/components/slides/SlideSoftInterventions";
+import { SlidePsiFCI } from "@/components/slides/SlidePsiFCI";
+import { SlideScale } from "@/components/slides/SlideScale";
+import { SlideRestrictedEC } from "@/components/slides/SlideRestrictedEC";
+import { SlideSSI } from "@/components/slides/SlideSSI";
+import { SlideTheorems } from "@/components/slides/SlideTheorems";
+import { SlideModelSampling } from "@/components/slides/SlideModelSampling";
+import { SlideModelAttention } from "@/components/slides/SlideModelAttention";
+import { SlideModelLoss } from "@/components/slides/SlideModelLoss";
+import { SlideResults } from "@/components/slides/SlideResults";
+import { SlideThankYou } from "@/components/slides/SlideThankYou";
 
-const SLIDES = [SlideCurrentState, SlideThirdParty, SlideWithSilex, SlideSearch, SlideChat, SlideAssist, SlideAgent, SlideDemo];
+const SLIDES = [
+  SlideTitle,
+  SlideCausalDiscovery,
+  SlideMarkov,
+  SlideMEC,
+  SlideWhyMEC,
+  SlideInterventions,
+  SlideSoftInterventions,
+  SlidePsiFCI,
+  SlideScale,
+  SlideRestrictedEC,
+  SlideSSI,
+  SlideTheorems,
+  SlideModelSampling,
+  SlideModelAttention,
+  SlideModelLoss,
+  SlideResults,
+  SlideThankYou,
+];
 
-const DEMO_SLIDE_INDEX = SLIDES.length - 1;
 
 export function Presentation() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const isDemo = currentSlide === DEMO_SLIDE_INDEX;
+  const isDemo = false;
 
   const goNext = useCallback(() => {
     setCurrentSlide((s) => Math.min(SLIDES.length - 1, s + 1));
